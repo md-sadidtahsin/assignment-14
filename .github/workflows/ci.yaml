@@ -13,9 +13,7 @@ jobs:
 
   security-scan:
     runs-on: ubuntu-latest
-    env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,7 +30,8 @@ jobs:
 
   build-test-analyze:
     runs-on: ubuntu-latest
-
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

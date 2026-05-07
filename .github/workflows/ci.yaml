@@ -42,14 +42,14 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
 
-      - name: Run Jest tests
-        run: npm test -- --ci --reporters=default --reporters=jest-junit
+      - name: Run Jest tests with coverage
+        run: npm test -- --coverage
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v4   # ✅ updated version
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: jest-results
-          path: ./junit.xml
+          name: coverage-report
+          path: coverage/lcov.info
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0 # Or current stable SHA update
@@ -61,7 +61,8 @@ jobs:
             -Dsonar.projectKey=md-sadidtahsin_assignment-14
             -Dsonar.organization=md-sadidtahsin
             -Dsonar.sources=src
-            -Dsonar.tests=tests
+            -Dsonar.exclusions=**/node_modules/**,**/coverage/**,tests/**
+            -Dsonar.test.inclusions=tests/**/*.test.js
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.qualitygate.wait=true
  

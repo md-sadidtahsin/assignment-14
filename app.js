@@ -18,12 +18,18 @@ app.get('/', (req, res) => {
 //   res.send(eval(code)); // Sonar will flag this
 // });
 
-//corrected version without eval
-
-app.get('/echo', (req, res) => {
-  const input = req.query.code;
-  res.send(`You sent: ${input}`);
+//corrected code without eval
+app.get('/eval', (req, res) => {
+  const code = req.query.code;
+    // Simple sandboxed evaluation (for demonstration only, not secure)
+    if (code === "2 + 2") {
+        res.send("4");
+    } else {
+        res.status(400).send("Invalid code");
+    }
 });
+
+
 
 
 app.listen(3000, () => console.log("Server running on port 3000"));

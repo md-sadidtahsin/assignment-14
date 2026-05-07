@@ -7,7 +7,8 @@ app.use(express.json());
 app.use('/users', usersRouter);
 
 // ❌ Bug: Hardcoded secret (bad practice)
-const SECRET_KEY = "12345-plaintext-secret"; 
+// const SECRET_KEY = "12345-plaintext-secret"; 
+const SECRET_KEY = process.env.SECRET_KEY;
 
 app.get('/', (req, res) => {
   res.send("Hello World");

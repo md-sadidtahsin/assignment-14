@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy security scan
-        uses: aquasecurity/trivy-action@0.20.0
+        uses: aquasecurity/trivy-action@0.19.0   # ✅ latest available release
         with:
           scan-type: fs
           scan-ref: .
@@ -27,7 +27,7 @@ jobs:
           exit-code: 0   # don’t fail pipeline, just report
           vuln-type: os,library
           severity: HIGH,CRITICAL
-  
+
   build-test-analyze:
     runs-on: ubuntu-latest
 

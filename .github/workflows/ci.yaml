@@ -1,3 +1,4 @@
+# .github/workflows/ci.yml
 name: CI Pipeline
 
 on:
@@ -11,40 +12,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Setup Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run unit tests
       - name: Run Jest tests
         run: npm test -- --ci --reporters=default --reporters=jest-junit
 
-      # Upload test results (optional)
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   # ✅ updated version
         with:
           name: jest-results
           path: ./junit.xml
 
-      # SonarCloud Scan
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=my-org_my-app
-            -Dsonar.organization=my-org
+            -Dsonar.projectKey=md-sadidtahsin_assignment-14
+            -Dsonar.organization=md-sadidtahsin
             -Dsonar.sources=.
             -Dsonar.tests=tests
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info

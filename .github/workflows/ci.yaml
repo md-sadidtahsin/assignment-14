@@ -18,13 +18,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Trivy security scan
-        uses: aquasecurity/trivy-action@0.19.0   # ✅ latest available release
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           scan-type: fs
           scan-ref: .
           format: table
-          exit-code: 0   # don’t fail pipeline, just report
+          exit-code: 1   # 
           vuln-type: os,library
           severity: HIGH,CRITICAL
 

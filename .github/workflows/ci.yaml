@@ -61,10 +61,9 @@ jobs:
             -Dsonar.organization=md-sadidtahsin
             -Dsonar.sources=.
             -Dsonar.tests=tests
-            -Dsonar.exclusions=tests/**,**/node_modules/**,**/coverage/**,**/lcov-report/**
-            -Dsonar.coverage.exclusions=**/test/**,**/*.spec.js,**/coverage/**
+            -Dsonar.exclusions=**/node_modules/**,**/coverage/**
+            -Dsonar.coverage.exclusions=tests/**,**/*.spec.js
             -Dsonar.test.inclusions=tests/**/*.test.js
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.qualitygate.wait=true
-
  

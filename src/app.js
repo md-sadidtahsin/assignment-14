@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const jwt = require("jsonwebtoken");
 const app = express();
 
@@ -18,8 +19,8 @@ app.get('/', (req, res) => {
 
 app.get('/eval', (req, res) => {
   const code = req.query.code;
-    if (code === "2 + 2") {
-        res.send("4");
+    if (code === "2+2") {
+        res.status(200).send("4");
     } else {
         res.status(400).send("Invalid code");
     }
@@ -27,8 +28,8 @@ app.get('/eval', (req, res) => {
 
 
 app.post("/login", (req, res) => {
-  const token = jwt.sign({ user: req.body.user }, SECRET_KEY); // ❌ flagged
-  res.json({ token });
+  const token = jwt.sign({ "user": req.body.user }, SECRET_KEY); // ❌ flagged
+  res.status(200).json({ token });
 });
 
 

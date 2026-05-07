@@ -35,5 +35,9 @@ app.post("/login", (req, res) => {
 
 
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// Only start the server if this file is run directly (not required as a module)
+if (require.main === module) {
+  app.listen(3000, () => console.log("Server running on port 3000"));
+}
+
 module.exports = app;

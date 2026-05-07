@@ -1,6 +1,8 @@
 const express = require('express');
 const jwt = require("jsonwebtoken");
 const app = express();
+
+app.disable("x-powered-by");
 const usersRouter = require('./routes/users');
 
 app.use(express.json());

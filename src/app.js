@@ -1,38 +1,19 @@
-const express = require('express');
-const jwt = require("jsonwebtoken");
+const express = require("express");
 const app = express();
 
-app.disable("x-powered-by");
-const usersRouter = require('./routes/users');
-
-app.use(express.json());
-app.use('/users', usersRouter);
-
-const SECRET_KEY = process.env.SECRET_KEY;
-
-app.get('/', (req, res) => {
-  res.send("Hello World");
+app.get("/", (req, res) => {
+  res.send("Hello SonarQube!");
 });
 
-
-
-app.get('/eval', (req, res) => {
-  const code = req.query.code;
-    if (code === "2 + 2") {
-        res.send("4");
-    } else {
-        res.status(400).send("Invalid code");
-    }
+app.get("/sum", (req, res) => {
+  const a = parseInt(req.query.a || 0);
+  const b = parseInt(req.query.b || 0);
+  res.json({ result: a + b });
 });
 
-
-app.post("/login", (req, res) => {
-  const token = jwt.sign({ user: req.body.user }, SECRET_KEY); // ❌ flagged
-  res.json({ token });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
-
-
-
-
-app.listen(3000, () => console.log("Server running on port 3000"));
+module.exports = app;

@@ -53,6 +53,19 @@ jobs:
           name: coverage-report
           path: coverage/lcov.info
 
+      # ---------------------------
+      # 3. Policy as Code with OPA
+      # ---------------------------
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+
+      - name: Run OPA policy check
+        run: |
+          opa eval --format=pretty -d policy.rego "data.docker.deny"
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0 # Or current stable SHA update
         env:

@@ -1,16 +1,30 @@
 {
-  "name": "express-sonar-demo",
+  "name": "my-app",
   "version": "1.0.0",
+  "description": "Node.js Express app with Jest tests, SonarQube analysis, and CI/CD integration",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "test": "jest --coverage --coverageReporters=lcov"
+    "test": "jest --coverage",
+    "lint": "eslint ."
   },
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.19.2"
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "supertest": "^7.2.2"
+    "supertest": "^6.3.4",
+    "eslint": "^9.0.0",
+    "jest-junit": "^16.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "routes/**/*.js",
+      "src/app.js"
+    ]
   }
 }

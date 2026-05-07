@@ -2,3 +2,4 @@ node_modules
 results.json
 loadtest.js
 coverage
+.env

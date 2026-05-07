@@ -1,3 +1,4 @@
+# .github/workflows/ci.yml
 name: CI Pipeline
 
 on:
@@ -6,41 +7,34 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# Optional: suppress warnings if any action still internally uses Node.js 20
 env:
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true   # ✅ allow deprecated Node.js
 
 jobs:
   build-test-analyze:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo (latest version)
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup Node.js (explicitly use 24)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '18'
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run unit tests with Jest
       - name: Run Jest tests
         run: npm test -- --ci --reporters=default --reporters=jest-junit
 
-      # Upload test results (latest version)
       - name: Upload test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4   # ✅ updated version
         with:
           name: jest-results
           path: ./junit.xml
 
-      # SonarCloud Scan (latest stable version)
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:

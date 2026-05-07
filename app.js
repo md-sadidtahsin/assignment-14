@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 //   res.send(eval(code)); // Sonar will flag this
 // });
 
-//corrected code without eval
+//corrected code without eval test
 app.get('/eval', (req, res) => {
   const code = req.query.code;
     // Simple sandboxed evaluation (for demonstration only, not secure)

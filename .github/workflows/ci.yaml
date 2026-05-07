@@ -65,5 +65,6 @@ jobs:
             -Dsonar.coverage.exclusions=**/test/**,**/*.spec.js,**/coverage/**
             -Dsonar.test.inclusions=tests/**/*.test.js
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.qualitygate.wait=true
 
-# -Dsonar.qualitygate.wait=true
+ 

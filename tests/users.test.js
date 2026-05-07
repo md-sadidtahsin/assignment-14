@@ -28,3 +28,23 @@ describe("App.js endpoints", () => {
     expect(res.body).toHaveProperty("token");
   });
 });
+
+describe("Users API", () => {
+  it("POST /users should add a user", async () => {
+    const newUser = { name: "Alice" };
+
+    const res = await request(app)
+      .post("/users")
+      .send(newUser);
+
+    expect(res.statusCode).toBe(201);
+    expect(res.text).toBe("User added");
+  });
+
+  it("GET /users should list users", async () => {
+    const res = await request(app).get("/users");
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.some(u => u.name === "Alice")).toBe(true);
+  });
+});

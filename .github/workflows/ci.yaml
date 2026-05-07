@@ -59,7 +59,7 @@ jobs:
           args: >
             -Dsonar.projectKey=md-sadidtahsin_assignment-14
             -Dsonar.organization=md-sadidtahsin
-            -Dsonar.sources=express-app
+            -Dsonar.sources=assignment-14
             -Dsonar.tests=tests
             -Dsonar.exclusions=**/node_modules/**,**/coverage/**
             -Dsonar.coverage.exclusions=tests/**,**/*.spec.js

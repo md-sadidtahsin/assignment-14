@@ -4,7 +4,7 @@
   "description": "Node.js Express app with Jest tests, SonarQube analysis, and CI/CD integration",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/app.js",
     "test": "jest --coverage",
     "lint": "eslint ."
   },

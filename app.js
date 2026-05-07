@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require("jsonwebtoken");
 const app = express();
 const usersRouter = require('./routes/users');
 
@@ -28,6 +29,13 @@ app.get('/eval', (req, res) => {
         res.status(400).send("Invalid code");
     }
 });
+
+
+app.post("/login", (req, res) => {
+  const token = jwt.sign({ user: req.body.user }, SECRET_KEY); // ❌ flagged
+  res.json({ token });
+});
+
 
 
 

@@ -13,9 +13,17 @@ app.get('/', (req, res) => {
 });
 
 // ❌ Vulnerability: Using eval (dangerous)
-app.get('/eval', (req, res) => {
-  const code = req.query.code;
-  res.send(eval(code)); // Sonar will flag this
+// app.get('/eval', (req, res) => {
+//   const code = req.query.code;
+//   res.send(eval(code)); // Sonar will flag this
+// });
+
+//corrected version without eval
+
+app.get('/echo', (req, res) => {
+  const input = req.query.code;
+  res.send(`You sent: ${input}`);
 });
+
 
 app.listen(3000, () => console.log("Server running on port 3000"));

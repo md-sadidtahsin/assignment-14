@@ -1,14 +1,11 @@
 package policy
 
-# Rule: deny if Docker image tag is "latest"
-docker_deny[msg] {
-  input.image.tag == "latest"
-  msg := "Docker images must not use 'latest' tag"
+docker_deny contains msg if {
+    input.image.tag == "latest"
+    msg := "latest tag is not allowed"
 }
 
-# Rule: deny if Kubernetes container has no resource limits
-k8s_deny[msg] {
-  container := input.spec.containers[_]
-  not container.resources.limits
-  msg := sprintf("Container %s must define resource limits", [container.name])
+docker_deny contains msg if {
+    not input.image.tag
+    msg := "image tag is required"
 }

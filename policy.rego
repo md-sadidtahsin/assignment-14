@@ -1,7 +1,13 @@
-package k8s
+package policy
 
-# Deny if a container has no resource limits
-deny[msg] {
+# Rule: deny if Docker image tag is "latest"
+docker_deny[msg] {
+  input.image.tag == "latest"
+  msg := "Docker images must not use 'latest' tag"
+}
+
+# Rule: deny if Kubernetes container has no resource limits
+k8s_deny[msg] {
   container := input.spec.containers[_]
   not container.resources.limits
   msg := sprintf("Container %s must define resource limits", [container.name])

@@ -62,10 +62,14 @@ jobs:
           chmod +x opa
           sudo mv opa /usr/local/bin/
 
-      - name: Run OPA policy check
+      - name: Run OPA Docker policy check
         run: |
           echo '{ "image": { "tag": "latest" } }' | opa eval --format=pretty -d policy.rego "data.policy.docker_deny"
 
+      - name: Run OPA Kubernetes policy check
+        run: |
+          opa eval --format=pretty -i k8s-deployment.json -d policy.rego "data.policy.k8s_deny"
+      
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0 # Or current stable SHA update
         env:

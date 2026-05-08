@@ -64,7 +64,7 @@ jobs:
 
       - name: Run OPA policy check
         run: |
-          opa eval --format=pretty -d policy.rego "data.docker.deny"
+          echo '{ "image": { "tag": "latest" } }' | opa eval --format=pretty -d policy.rego "data.policy.docker_deny"
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0 # Or current stable SHA update
